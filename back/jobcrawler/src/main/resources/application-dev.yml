@@ -1,0 +1,17 @@
+server:
+  port: 8082
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+    jpa:
+      hibernate:
+        ddl-auto: update
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+jwt:
+  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
