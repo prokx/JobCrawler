@@ -7,6 +7,5 @@ export const loginRequest = async (input) => {
 
 export const joinRequest = async (input) => {
   const res = await axios.post("http://localhost:8082/members/join", input);
-  console.log(res);
   return res.data;
 };
