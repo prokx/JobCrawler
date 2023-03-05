@@ -5,6 +5,8 @@ const initialState = {
     memberId: "",
     password: "",
     isLogin: false,
+    accessToken: "",
+    refreshToken: "",
   },
 };
 
@@ -20,14 +22,15 @@ const login = createSlice({
       state.user = {
         ...state.user,
         memberId: action.payload.memberId,
-        password: action.payload.password,
         isLogin: true,
+        accessToken: action.payload.accessToken,
       };
     },
   },
 });
 
 export const { countUp } = login.actions;
-export const selectCount = (state) => state.login.count;
-export const selectUser = (state) => state.login.user;
+export const selectIsLogin = (state) => state.login.user.isLogin;
+export const selectMemberId = (state) => state.login.user.memberId;
+export const selectAccessToken = (state) => state.login.user.accessToken;
 export default login.reducer;

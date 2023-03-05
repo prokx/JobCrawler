@@ -2,9 +2,14 @@ import { call, all, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { loginRequest, joinRequest } from "api";
 
 function* login(action) {
-  console.log("로그인 시도");
   try {
     const res = yield call(loginRequest, action.payload);
+
+    if (res.status === 200) {
+      yield put({ type: "login/SET_USER", payload: res.data });
+    } else {
+      alert("로그인 실패");
+    }
   } catch (e) {
     console.log(e);
   }

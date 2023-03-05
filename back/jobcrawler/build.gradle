@@ -1,3 +1,8 @@
+buildscript {
+	ext {
+		queryDslVersion = "4.4.0"
+	}
+}
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.4.5'
@@ -31,13 +36,28 @@ dependencies {
 	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.31'
+	implementation 'org.jsoup:jsoup:1.14.2'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-}
 
+	// QueryDSL
+	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+	annotationProcessor(
+			"javax.persistence:javax.persistence-api",
+			"javax.annotation:javax.annotation-api",
+			"com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+}
+// QueryDSL
+sourceSets {
+	main {
+		java {
+			srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
+		}
+	}
+}
 tasks.named('test') {
 	useJUnitPlatform()
 }
